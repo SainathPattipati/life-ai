@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life AI - Your Day on Autopilot</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(180deg, #0a0a0a 0%, #1e1b4b 50%, #312e81 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(168, 85, 247, 0.15) 0%, transparent 40%),
+                        radial-gradient(circle at 70% 60%, rgba(236, 72, 153, 0.15) 0%, transparent 40%),
+                        radial-gradient(circle at 50% 30%, rgba(99, 102, 241, 0.1) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(-5%, -5%) rotate(0deg); }
+            50% { transform: translate(5%, 5%) rotate(180deg); }
+        }
+        
+        nav {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            padding: 30px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #a855f7, #ec4899);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #a855f7;
+        }
+        
+        .early-access-btn {
+            background: linear-gradient(135deg, #a855f7, #ec4899);
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+        
+        .early-access-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            padding: 180px 5% 100px;
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+        
+        .hero-text {
+            animation: slideInLeft 1s ease-out;
+        }
+        
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(168, 85, 247, 0.2);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 14px;
+            color: #a855f7;
+            margin-bottom: 20px;
+        }
+        
+        .badge span {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        h1 {
+            font-size: 72px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            background: linear-gradient(to right, #ffffff, #a855f7, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subtitle {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 40px;
+            line-height: 1.5;
+        }
+        
+        .email-form {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        
+        .email-input {
+            flex: 1;
+            padding: 16px 24px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            color: white;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s;
+        }
+        
+        .email-input:focus {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: #a855f7;
+        }
+        
+        .email-input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+        
+        .submit-btn {
+            padding: 16px 32px;
+            background: linear-gradient(135deg, #a855f7, #ec4899);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.4);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .trust-badges {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+        }
+        
+        .phone-mockup {
+            position: relative;
+            animation: slideInRight 1s ease-out;
+        }
+        
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .phone {
+            width: 380px;
+            height: 780px;
+            background: #000;
+            border-radius: 40px;
+            padding: 10px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            position: relative;
+            transform: perspective(1000px) rotateY(-10deg);
+        }
+        
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #1e1b4b, #312e81);
+            border-radius: 30px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .floating-cards {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .floating-card {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card-1 {
+            top: 20%;
+            right: -60px;
+            animation: floatCard1 4s ease-in-out infinite;
+        }
+        
+        .card-2 {
+            top: 40%;
+            left: -60px;
+            animation: floatCard2 5s ease-in-out infinite;
+        }
+        
+        .card-3 {
+            bottom: 20%;
+            right: -80px;
+            animation: floatCard3 6s ease-in-out infinite;
+        }
+        
+        @keyframes floatCard1 {
+            0%, 100% { transform: translateY(0) rotate(2deg); }
+            50% { transform: translateY(-20px) rotate(-2deg); }
+        }
+        
+        @keyframes floatCard2 {
+            0%, 100% { transform: translateY(0) rotate(-2deg); }
+            50% { transform: translateY(-15px) rotate(2deg); }
+        }
+        
+        @keyframes floatCard3 {
+            0%, 100% { transform: translateY(0) rotate(1deg); }
+            50% { transform: translateY(-25px) rotate(-1deg); }
+        }
+        
+        .stats-section {
+            background: linear-gradient(180deg, #1e1b4b 0%, #0a0a0a 100%);
+            padding: 100px 5%;
+            text-align: center;
+        }
+        
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px 20px;
+            transition: all 0.3s;
+        }
+        
+        .stat-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-10px);
+        }
+        
+        .stat-number {
+            font-size: 48px;
+            font-weight: bold;
+            color: #a855f7;
+            margin-bottom: 8px;
+        }
+        
+        .stat-label {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 16px;
+        }
+        
+        .features-section {
+            padding: 100px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-size: 48px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 60px;
+            background: linear-gradient(to right, #a855f7, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #a855f7, #ec4899);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .feature-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #a855f7, #ec4899);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        
+        .feature-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        
+        .feature-desc {
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.6;
+        }
+        
+        .pricing-section {
+            padding: 100px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+        
+        .price-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .price-card.featured {
+            background: linear-gradient(180deg, rgba(168, 85, 247, 0.1) 0%, rgba(236, 72, 153, 0.05) 100%);
+            border: 2px solid rgba(168, 85, 247, 0.3);
+            transform: scale(1.05);
+        }
+        
+        .price-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .price-card.featured:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+        
+        .price-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #a855f7, #ec4899);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+        
+        .price-title {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .price-amount {
+            margin-bottom: 16px;
+        }
+        
+        .price-number {
+            font-size: 48px;
+            font-weight: bold;
+            background: linear-gradient(to right, #a855f7, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .price-period {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 18px;
+        }
+        
+        .price-desc {
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .price-features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .price-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 15px;
+        }
+        
+        .price-features li.disabled {
+            opacity: 0.4;
+        }
+        
+        .check {
+            color: #10b981;
+            font-weight: bold;
+        }
+        
+        .x {
+            color: #ef4444;
+            font-weight: bold;
+        }
+        
+        .price-btn {
+            width: 100%;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .price-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(1.02);
+        }
+        
+        .featured-btn {
+            background: linear-gradient(135deg, #a855f7, #ec4899);
+            border: none;
+        }
+        
+        .featured-btn:hover {
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.4);
+        }
+        
+        .savings-badge {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #10b981;
+        }
+        
+        .pay-per-action {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 60px;
+            margin-top: 80px;
+        }
+        
+        .action-fees-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .action-fee-card {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .fee-icon {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+        
+        .action-fee-card h4 {
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: white;
+        }
+        
+        .fee-amount {
+            font-size: 28px;
+            font-weight: bold;
+            color: #a855f7;
+            margin-bottom: 8px;
+        }
+        
+        .fee-desc {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .how-it-works {
+            padding: 100px 5%;
+            background: linear-gradient(180deg, #0a0a0a 0%, #1e1b4b 100%);
+        }
+        
+        .timeline {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, #a855f7, #ec4899);
+        }
+        
+        .timeline-item {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 80px;
+            position: relative;
+        }
+        
+        .timeline-content {
+            width: 45%;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-right: 55%;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: 55%;
+        }
+        
+        .timeline-number {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #a855f7, #ec4899);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            z-index: 10;
+        }
+        
+        .cta-section {
+            padding: 100px 5%;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(236, 72, 153, 0.1));
+            border-radius: 40px;
+            margin: 0 5% 100px;
+        }
+        
+        .cta-title {
+            font-size: 56px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .cta-subtitle {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 40px;
+        }
+        
+        footer {
+            padding: 40px 5%;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                padding: 120px 5% 60px;
+            }
+            
+            h1 {
+                font-size: 48px;
+            }
+            
+            .phone {
+                width: 300px;
+                height: 620px;
+                margin: 0 auto;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .price-card.featured {
+                transform: scale(1);
+            }
+            
+            .action-fees-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .timeline-content {
+                width: 90%;
+            }
+            
+            .timeline-item:nth-child(odd) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content {
+                margin: 0;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <nav>
+            <div class="logo">
+                <div class="logo-icon">⚡</div>
+                <span>Life AI</span>
+            </div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How it Works</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#" class="early-access-btn" onclick="scrollToTop(event)">Get Early Access</a>
+            </div>
+        </nav>
+        
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="badge">
+                    <span>🚀</span> AI Assistant that Actually Does Things
+                </div>
+                <h1>Your Day on Autopilot</h1>
+                <p class="subtitle">
+                    Life AI handles your daily tasks automatically. From ordering groceries to scheduling appointments, 
+                    paying bills to finding better deals - your personal AI works 24/7 so you don't have to.
+                </p>
+                
+                <form class="email-form" onsubmit="handleSubmit(event)">
+                    <input type="email" class="email-input" placeholder="Enter your email" required>
+                    <button type="submit" class="submit-btn">Get Early Access</button>
+                </form>
+                
+                <div class="trust-badges">
+                    <span>🔒 No credit card required</span>
+                    <span>⚡ 1,247+ tasks automated daily</span>
+                    <span>💰 $12,890 average monthly savings</span>
+                </div>
+            </div>
+            
+            <div class="phone-mockup">
+                <div class="phone">
+                    <div class="phone-screen">
+                        <div style="padding: 20px;">
+                            <div style="background: linear-gradient(135deg, #6366f1, #a855f7, #ec4899); border-radius: 20px; padding: 20px; margin-bottom: 20px;">
+                                <p style="font-size: 14px; opacity: 0.9;">Good morning Sarah!</p>
+                                <p style="font-size: 18px; font-weight: bold; margin: 10px 0;">Your AI saved you today:</p>
+                                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px;">
+                                    <div style="text-align: center; background: rgba(255,255,255,0.1); padding: 10px; border-radius: 10px;">
+                                        <p style="font-size: 20px; font-weight: bold;">3.5h</p>
+                                        <p style="font-size: 10px; opacity: 0.8;">Time</p>
+                                    </div>
+                                    <div style="text-align: center; background: rgba(255,255,255,0.1); padding: 10px; border-radius: 10px;">
+                                        <p style="font-size: 20px; font-weight: bold;">$892</p>
+                                        <p style="font-size: 10px; opacity: 0.8;">Money</p>
+                                    </div>
+                                    <div style="text-align: center; background: rgba(255,255,255,0.1); padding: 10px; border-radius: 10px;">
+                                        <p style="font-size: 20px; font-weight: bold;">47</p>
+                                        <p style="font-size: 10px; opacity: 0.8;">Tasks</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; padding: 15px; margin-bottom: 10px;">
+                                <div style="display: flex; gap: 10px; align-items: start;">
+                                    <span style="font-size: 24px;">🛒</span>
+                                    <div style="flex: 1;">
+                                        <p style="font-size: 14px; font-weight: 500;">Groceries ordered from Whole Foods</p>
+                                        <p style="font-size: 12px; opacity: 0.6; margin-top: 4px;">Saved $45 with coupons</p>
+                                    </div>
+                                    <span style="color: #4ade80;">✓</span>
+                                </div>
+                            </div>
+                            
+                            <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; padding: 15px; margin-bottom: 10px;">
+                                <div style="display: flex; gap: 10px; align-items: start;">
+                                    <span style="font-size: 24px;">📅</span>
+                                    <div style="flex: 1;">
+                                        <p style="font-size: 14px; font-weight: 500;">Dentist rescheduled to avoid conflict</p>
+                                        <p style="font-size: 12px; opacity: 0.6; margin-top: 4px;">Thursday 3 PM works better</p>
+                                    </div>
+                                    <span style="color: #4ade80;">✓</span>
+                                </div>
+                            </div>
+                            
+                            <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; padding: 15px;">
+                                <div style="display: flex; gap: 10px; align-items: start;">
+                                    <span style="font-size: 24px;">💰</span>
+                                    <div style="flex: 1;">
+                                        <p style="font-size: 14px; font-weight: 500;">Found cheaper car insurance</p>
+                                        <p style="font-size: 12px; opacity: 0.6; margin-top: 4px;">$840/year savings available</p>
+                                    </div>
+                                    <span style="color: #fbbf24;">!</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="floating-cards">
+                    <div class="floating-card card-1">
+                        <p style="font-size: 12px; opacity: 0.6;">Just now</p>
+                        <p style="font-size: 14px; font-weight: 500;">✓ Paid electric bill</p>
+                        <p style="font-size: 16px; color: #4ade80; margin-top: 4px;">Saved $10 late fee</p>
+                    </div>
+                    <div class="floating-card card-2">
+                        <p style="font-size: 12px; opacity: 0.6;">2 min ago</p>
+                        <p style="font-size: 14px; font-weight: 500;">📅 Lunch booked</p>
+                        <p style="font-size: 16px; color: #a855f7; margin-top: 4px;">Table for 2 at 12:30</p>
+                    </div>
+                    <div class="floating-card card-3">
+                        <p style="font-size: 12px; opacity: 0.6;">5 min ago</p>
+                        <p style="font-size: 14px; font-weight: 500;">🚗 Uber scheduled</p>
+                        <p style="font-size: 16px; color: #3b82f6; margin-top: 4px;">Pickup at 11:45 AM</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">68 hrs</div>
+                <div class="stat-label">Average Monthly Time Saved</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">$12,890</div>
+                <div class="stat-label">Average Monthly Savings</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">1,247</div>
+                <div class="stat-label">Tasks Automated Monthly</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">430x</div>
+                <div class="stat-label">ROI on Subscription</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <h2 class="section-title">Life Runs Itself</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🛒</div>
+                <h3 class="feature-title">Smart Shopping</h3>
+                <p class="feature-desc">
+                    Automatically orders groceries when supplies run low. Finds coupons, compares prices, 
+                    and schedules delivery when you're home.
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📅</div>
+                <h3 class="feature-title">Calendar Genius</h3>
+                <p class="feature-desc">
+                    Schedules appointments, resolves conflicts, and optimizes your day. Never double-book 
+                    or miss important meetings again.
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3 class="feature-title">Bill Autopilot</h3>
+                <p class="feature-desc">
+                    Pays bills on time, negotiates better rates, and finds savings. Tracks subscriptions 
+                    and cancels ones you don't use.
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🚗</div>
+                <h3 class="feature-title">Travel Assistant</h3>
+                <p class="feature-desc">
+                    Books rides, finds parking, plans routes. Schedules transportation based on your 
+                    calendar and preferences.
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🍽️</div>
+                <h3 class="feature-title">Dining Concierge</h3>
+                <p class="feature-desc">
+                    Makes restaurant reservations, orders takeout, and remembers your favorites. 
+                    Finds new places you'll love.
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📦</div>
+                <h3 class="feature-title">Package Tracker</h3>
+                <p class="feature-desc">
+                    Monitors all deliveries, alerts you when packages arrive, and handles returns. 
+                    Reorders essentials before you run out.
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Pricing Section -->
+    <section class="pricing-section" id="pricing">
+        <h2 class="section-title">Simple, Transparent Pricing</h2>
+        <p style="text-align: center; color: rgba(255,255,255,0.7); font-size: 18px; margin-bottom: 60px;">
+            Choose your plan. Pay only for actions that save you time and money.
+        </p>
+        
+        <div class="pricing-grid">
+            <!-- Free Plan -->
+            <div class="price-card">
+                <div class="price-badge">STARTER</div>
+                <h3 class="price-title">Free</h3>
+                <div class="price-amount">
+                    <span class="price-number">$0</span>
+                    <span class="price-period">/month</span>
+                </div>
+                <p class="price-desc">Perfect for trying Life AI</p>
+                
+                <ul class="price-features">
+                    <li><span class="check">✓</span> 1 Integration (Calendar)</li>
+                    <li><span class="check">✓</span> 10 Automations/month</li>
+                    <li><span class="check">✓</span> Basic scheduling</li>
+                    <li><span class="check">✓</span> Email summaries</li>
+                    <li><span class="check">✓</span> Mobile app access</li>
+                    <li class="disabled"><span class="x">✗</span> Shopping automations</li>
+                    <li class="disabled"><span class="x">✗</span> Bill payments</li>
+                    <li class="disabled"><span class="x">✗</span> Price monitoring</li>
+                </ul>
+                
+                <button class="price-btn" onclick="handlePricingClick('free')">Start Free</button>
+            </div>
+            
+            <!-- Plus Plan -->
+            <div class="price-card featured">
+                <div class="price-badge">MOST POPULAR</div>
+                <h3 class="price-title">Plus</h3>
+                <div class="price-amount">
+                    <span class="price-number">$9.99</span>
+                    <span class="price-period">/month</span>
+                </div>
+                <p class="price-desc">Save $19.89 with yearly ($99/yr)</p>
+                
+                <ul class="price-features">
+                    <li><span class="check">✓</span> 20 Integrations</li>
+                    <li><span class="check">✓</span> 500 Automations/month</li>
+                    <li><span class="check">✓</span> Calendar, Email, Shopping apps</li>
+                    <li><span class="check">✓</span> Smart scheduling & conflicts</li>
+                    <li><span class="check">✓</span> Grocery automation</li>
+                    <li><span class="check">✓</span> Basic bill management</li>
+                    <li><span class="check">✓</span> Delivery tracking</li>
+                    <li><span class="check">✓</span> Priority support</li>
+                </ul>
+                
+                <button class="price-btn featured-btn" onclick="handlePricingClick('plus')">Get Plus</button>
+                
+                <div class="savings-badge">
+                    <span>Average savings: $3,200/month</span>
+                </div>
+            </div>
+            
+            <!-- Pro Plan -->
+            <div class="price-card">
+                <div class="price-badge">ENTERPRISE</div>
+                <h3 class="price-title">Pro</h3>
+                <div class="price-amount">
+                    <span class="price-number">$19.99</span>
+                    <span class="price-period">/month</span>
+                </div>
+                <p class="price-desc">For power users & families</p>
+                
+                <ul class="price-features">
+                    <li><span class="check">✓</span> Unlimited Integrations</li>
+                    <li><span class="check">✓</span> Unlimited Automations</li>
+                    <li><span class="check">✓</span> All app connections</li>
+                    <li><span class="check">✓</span> Advanced AI optimization</li>
+                    <li><span class="check">✓</span> Automatic bill negotiation</li>
+                    <li><span class="check">✓</span> Investment monitoring</li>
+                    <li><span class="check">✓</span> Family sharing (5 accounts)</li>
+                    <li><span class="check">✓</span> White-glove support</li>
+                </ul>
+                
+                <button class="price-btn" onclick="handlePricingClick('pro')">Go Pro</button>
+            </div>
+        </div>
+        
+        <!-- Pay Per Action Section -->
+        <div class="pay-per-action">
+            <h3 style="font-size: 28px; margin-bottom: 20px; text-align: center;">Pay-Per-Action Fees</h3>
+            <p style="text-align: center; color: rgba(255,255,255,0.7); margin-bottom: 30px;">
+                Only pay when Life AI completes approved high-value actions
+            </p>
+            
+            <div class="action-fees-grid">
+                <div class="action-fee-card">
+                    <div class="fee-icon">💳</div>
+                    <h4>Bill Payments</h4>
+                    <p class="fee-amount">$0.50</p>
+                    <p class="fee-desc">When bills are automatically paid</p>
+                </div>
+                <div class="action-fee-card">
+                    <div class="fee-icon">🛒</div>
+                    <h4>Reorders</h4>
+                    <p class="fee-amount">$0.25</p>
+                    <p class="fee-desc">Automatic grocery & essentials</p>
+                </div>
+                <div class="action-fee-card">
+                    <div class="fee-icon">❌</div>
+                    <h4>Cancellations</h4>
+                    <p class="fee-amount">$0.50</p>
+                    <p class="fee-desc">Cancel unused subscriptions</p>
+                </div>
+                <div class="action-fee-card">
+                    <div class="fee-icon">💰</div>
+                    <h4>Negotiations</h4>
+                    <p class="fee-amount">$0.10</p>
+                    <p class="fee-desc">Better rates & deals found</p>
+                </div>
+            </div>
+            
+            <p style="text-align: center; color: rgba(255,255,255,0.5); font-size: 14px; margin-top: 30px;">
+                💡 Average user pays $8-12/month in action fees while saving $12,890+
+            </p>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how-it-works">
+        <h2 class="section-title">How Life AI Works</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-number">1</div>
+                <div class="timeline-content">
+                    <h3 style="font-size: 24px; margin-bottom: 12px;">Connect Your Apps</h3>
+                    <p style="color: rgba(255,255,255,0.6);">
+                        Link your calendar, email, shopping apps, and more. Life AI integrates with 100+ services you already use.
+                    </p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-number">2</div>
+                <div class="timeline-content">
+                    <h3 style="font-size: 24px; margin-bottom: 12px;">AI Learns Your Life</h3>
+                    <p style="color: rgba(255,255,255,0.6);">
+                        Our AI understands your routines, preferences, and needs. It gets smarter every day, personalizing to you.
+                    </p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-number">3</div>
+                <div class="timeline-content">
+                    <h3 style="font-size: 24px; margin-bottom: 12px;">Tasks Run Automatically</h3>
+                    <p style="color: rgba(255,255,255,0.6);">
+                        Life AI handles tasks proactively. Review what it's done, approve important actions, or let it run fully autonomous.
+                    </p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-number">4</div>
+                <div class="timeline-content">
+                    <h3 style="font-size: 24px; margin-bottom: 12px;">Save Time & Money</h3>
+                    <p style="color: rgba(255,255,255,0.6);">
+                        Watch as hours return to your day and savings add up. Life AI shows you exactly what it's accomplished.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2 class="cta-title">Ready to Put Life on Autopilot?</h2>
+        <p class="cta-subtitle">Join thousands who are saving 68+ hours and $12,890+ monthly</p>
+        <form class="email-form" style="max-width: 500px; margin: 0 auto;" onsubmit="handleSubmit(event)">
+            <input type="email" class="email-input" placeholder="Enter your email for early access" required>
+            <button type="submit" class="submit-btn">Get Started</button>
+        </form>
+        <p style="margin-top: 20px; color: rgba(255,255,255,0.5); font-size: 14px;">
+            🎁 First 1,000 users get 3 months free ($89.97 value)
+        </p>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Life AI. Your day on autopilot.</p>
+    </footer>
+    
+    <script>
+        // IMPORTANT: Replace this URL with your Google Apps Script Web App URL
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyIyDA2UzpPWIUIrPmR--fk7BnHQ5j-ihjwnoQLDaIk4aoB4G2G1WsLRbEYR5ob3qqy/exec';
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('input[type="email"]').value;
+            const btn = event.target.querySelector('button');
+            const originalText = btn.textContent;
+            
+            // Disable button during submission
+            btn.disabled = true;
+            btn.textContent = 'Submitting...';
+            
+            // Send to Google Sheets
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: email,
+                    timestamp: new Date().toISOString(),
+                    source: window.location.pathname
+                })
+            })
+            .then(() => {
+                // Show success message
+                btn.textContent = '✓ You\'re on the list!';
+                btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+                
+                // Reset form after delay
+                setTimeout(() => {
+                    event.target.reset();
+                    btn.textContent = originalText;
+                    btn.style.background = 'linear-gradient(135deg, #a855f7, #ec4899)';
+                    btn.disabled = false;
+                }, 3000);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                btn.textContent = '✗ Error. Try again';
+                btn.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
+                
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = 'linear-gradient(135deg, #a855f7, #ec4899)';
+                    btn.disabled = false;
+                }, 3000);
+            });
+        }
+        
+        function handlePricingClick(plan) {
+            console.log('Selected plan:', plan);
+            // Scroll to top email form
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function scrollToTop(event) {
+            event.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
